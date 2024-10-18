@@ -102,7 +102,7 @@ function StartFunc() {
   gameLayer.clearLayers();
   document.getElementById('userinput').value = '';
   document.getElementById('suggestions').innerHTML = "";
-
+  current = new turf.circle([-4,48], 0, { steps: 100, units: "kilometers" });
   score = 0;
   count = 0;
   document.getElementById('score').innerHTML = score;
@@ -143,7 +143,7 @@ function GuessFunc() {
     count +=1 ;
     document.getElementById('count').innerHTML = count;   
     
-    if(score>=99.9){
+    if(score>=100){
       alert('Well done');
     }
   }
