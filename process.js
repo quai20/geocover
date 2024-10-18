@@ -14,7 +14,7 @@ function initDemoMap() {
     inertia: false
   });
 
-  map.setView([48.25, -3.0], 8);
+  map.setView([46.9, 3.6], 6);
 
   //INIT RETURN FUNCTION
   return {
@@ -25,18 +25,6 @@ function initDemoMap() {
 // MAP CREATION
 var mapStuff = initDemoMap();
 var map = mapStuff.map;
-
-//L.geoJSON(francesh).addTo(map);
-
-// var c1 = new turf.circle([-4,48], 20, { steps: 100, units: "kilometers" });
-// L.geoJSON(c1).addTo(map);
-// var c2 = new turf.circle([-4,48.1], 20, { steps: 100, units: "kilometers" });
-// L.geoJSON(c2).addTo(map);
-
-// var allCircle = turf.union(turf.featureCollection([c1,c2]));
-
-// var difference = turf.difference(turf.featureCollection([britanny,allCircle]));
-// L.geoJSON(difference,{style:{'color':'red'}}).addTo(map);
 
 var gameLayer = new L.LayerGroup();
 gameLayer.addTo(map);
@@ -49,6 +37,7 @@ var score = 0;
 var count = 0;
 var prop;
 var current = new turf.circle([-4,48], 0, { steps: 100, units: "kilometers" });
+var support;
 
 //search index
 const index = new FlexSearch.Index({
@@ -107,10 +96,14 @@ function StartFunc() {
   count = 0;
   document.getElementById('score').innerHTML = score;
   document.getElementById('count').innerHTML = count;
-  //get difficulty
+  //get difficulty  
   difficulty = document.getElementById('difficulty').value;  
-  // Draw
-  L.geoJSON(britanny).addTo(gameLayer);
+  //get gamesh
+  gamesh = document.getElementById('gamesh').value;  
+  if(gamesh=='bretagne'){support=britanny;}
+  if(gamesh=='france'){support=francesh.features[0];}
+  // Draw  
+  L.geoJSON(support).addTo(gameLayer);
 }
 
 function GuessFunc() {
@@ -138,7 +131,7 @@ function GuessFunc() {
     L.geoJSON(allCircle).addTo(gameLayer);
     current = allCircle;
     
-    var difference = turf.difference(turf.featureCollection([britanny,allCircle]));
+    var difference = turf.difference(turf.featureCollection([support,allCircle]));
     L.geoJSON(difference,{style:{'color':'red'}}).addTo(gameLayer);
 
     if(difference==null){
@@ -146,7 +139,7 @@ function GuessFunc() {
       alert('Well done');
     }
     else{
-      score = (turf.area(britanny)-turf.area(difference))*100/turf.area(britanny);
+      score = (turf.area(support)-turf.area(difference))*100/turf.area(support);
     }    
     document.getElementById('score').innerHTML = score.toFixed(2);    
     

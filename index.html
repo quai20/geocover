@@ -18,7 +18,14 @@
             <p>Every city guess will fill a circle of the difficulty diameter centered on your guess. 
                The goal is to cover the entire area.</p>
             <br><br>
-            <div id="wrapper">                
+            <div id="wrapper">        
+                <p>Play with :</p>
+                <select name="gamesh" id="gamesh">                    
+                    <option value="bretagne">Bretagne</option>
+                    <option value="france">France</option>                    
+                  </select>
+                  
+                <br><br>
                 <p>Difficulty (km) :</p>
                 <input type="number" id="difficulty" name="difficulty" min="10" max="300" value="20" />
                 <button type="button" onclick="StartFunc()">Start</button>                
@@ -54,8 +61,8 @@
     <!-- turf -->    
     <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
 
-    <script src="data/region-bretagne copy.js"></script>
-    <!-- <script src="data/france-detailed.js"></script> -->
+    <script src="data/region-bretagne.js"></script>
+    <script src="data/france-detailed.js"></script>
 
     <!--process-->
     <script src="process.js"></script>
