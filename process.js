@@ -140,7 +140,7 @@ function GuessFunc() {
     }
     else{
       score = (turf.area(support)-turf.area(difference))*100/turf.area(support);
-      if(score>=100){
+      if(score.toFixed(2)>=100){
         alert('Well done');
       }
     }    
