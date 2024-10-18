@@ -104,7 +104,9 @@ function StartFunc() {
   document.getElementById('suggestions').innerHTML = "";
 
   score = 0;
+  count = 0;
   document.getElementById('score').innerHTML = score;
+  document.getElementById('count').innerHTML = count;
   //get difficulty
   difficulty = document.getElementById('difficulty').value;  
   // Draw
