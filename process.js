@@ -39,6 +39,14 @@ var prop;
 var current = new turf.circle([-4,48], 0, { steps: 100, units: "kilometers" });
 var support;
 
+var blueIcon = new L.Icon({
+  iconUrl: 'dist/icons/marker-icon-2x-blue.png',
+  iconSize: [20, 20],
+  iconAnchor: [10, 10],
+  popupAnchor: [1, -34],
+  shadowSize: [18, 18]
+});
+
 //search index
 const index = new FlexSearch.Index({
   preset: 'default',
@@ -123,9 +131,13 @@ function GuessFunc() {
   else {
     // draw
     count +=1 ;
-    document.getElementById('count').innerHTML = count;   
+    document.getElementById('count').innerHTML = count;       
 
     gameLayer.clearLayers();
+
+    var markerb = new L.Marker(new L.LatLng(lats[ix], lons[ix]), { title: names[ix], icon: blueIcon }).addTo(gameLayer);
+    markerb.bindTooltip(names[ix]);
+
     var c1 = new turf.circle([lons[ix],lats[ix]], difficulty, { steps: 100, units: "kilometers" });
     var allCircle = turf.union(turf.featureCollection([current,c1]));    
     L.geoJSON(allCircle).addTo(gameLayer);
