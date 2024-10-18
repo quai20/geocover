@@ -129,6 +129,9 @@ function GuessFunc() {
   }
   else {
     // draw
+    count +=1 ;
+    document.getElementById('count').innerHTML = count;   
+
     gameLayer.clearLayers();
     var c1 = new turf.circle([lons[ix],lats[ix]], difficulty, { steps: 100, units: "kilometers" });
     var allCircle = turf.union(turf.featureCollection([current,c1]));    
@@ -138,14 +141,15 @@ function GuessFunc() {
     var difference = turf.difference(turf.featureCollection([britanny,allCircle]));
     L.geoJSON(difference,{style:{'color':'red'}}).addTo(gameLayer);
 
-    score = (turf.area(britanny)-turf.area(difference))*100/turf.area(britanny);
-    document.getElementById('score').innerHTML = score.toFixed(2);    
-    count +=1 ;
-    document.getElementById('count').innerHTML = count;   
-    
-    if(score>=100 || difference==null){
+    if(difference==null){
+      score = 100;
       alert('Well done');
     }
+    else{
+      score = (turf.area(britanny)-turf.area(difference))*100/turf.area(britanny);
+    }    
+    document.getElementById('score').innerHTML = score.toFixed(2);    
+    
   }
 }
 
