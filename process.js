@@ -88,7 +88,7 @@ function show_results() {
     }
     entry.textContent = names[results[i]];
     entry.onclick = function () {
-      console.log(this.textContent);
+      //console.log(this.textContent);
       document.getElementById('userinput').value = this.textContent;
     };
   }
@@ -143,7 +143,7 @@ function GuessFunc() {
     count +=1 ;
     document.getElementById('count').innerHTML = count;   
     
-    if(score>=100){
+    if(score>=100 || difference==null){
       alert('Well done');
     }
   }
