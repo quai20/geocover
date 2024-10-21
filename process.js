@@ -28,6 +28,9 @@ var map = mapStuff.map;
 
 var gameLayer = new L.LayerGroup();
 gameLayer.addTo(map);
+var cityLayer = new L.LayerGroup();
+cityLayer.addTo(map);
+
 var cities;
 var names = [];
 var lats = [];
@@ -97,6 +100,7 @@ function show_results() {
 function StartFunc() {
 
   gameLayer.clearLayers();
+  cityLayer.clearLayers();
   document.getElementById('userinput').value = '';
   document.getElementById('suggestions').innerHTML = "";
   current = new turf.circle([-4,48], 0, { steps: 100, units: "kilometers" });
@@ -135,7 +139,7 @@ function GuessFunc() {
 
     gameLayer.clearLayers();
 
-    var markerb = new L.Marker(new L.LatLng(lats[ix], lons[ix]), { title: names[ix], icon: blueIcon }).addTo(gameLayer);
+    var markerb = new L.Marker(new L.LatLng(lats[ix], lons[ix]), { title: names[ix], icon: blueIcon }).addTo(cityLayer);
     markerb.bindTooltip(names[ix]);
 
     var c1 = new turf.circle([lons[ix],lats[ix]], difficulty, { steps: 100, units: "kilometers" });
